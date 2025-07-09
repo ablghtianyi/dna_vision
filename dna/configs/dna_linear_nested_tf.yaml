@@ -1,0 +1,55 @@
+# Model configuration
+model:
+  model_type: "dna_linear_nested_tf"
+  image_size: 224  # Tiny Imagenet image size
+  patch_size: 16
+  in_channels: 3
+  embed_dim: 256
+  num_heads: 4
+  max_path_len: 12
+  n_tf: 24
+  n_attn: 0
+  n_mlp: 0
+  module_top_k: 2
+  mlp_ratio: 4.0
+  qkv_bias: false
+  dropout: 0.0
+  attn_dropout: 0.0
+  num_classes: 1000  # ImageNet
+  module_temperature: null  # Only use during inference time
+  bias_u: 0.0  # Load balancing learning rate
+  skip_factor: 0.0  # Expected skipped tokens
+  use_bias: False
+  early_exit: False
+  hard_exit: False
+  use_id: False
+  in_block_rescale: True
+  start_node_depth: 0
+
+# Training configuration
+training:
+  batch_size: 2048
+  num_epochs: 300
+  learning_rate: 0.0015
+  weight_decay: 0.05
+  warmup_epochs: 10
+  dtype: "bf16" # bf16, f16, everything else will be fp32
+  clip_norm: 0.0
+  seed: 0
+
+# Data configuration
+data:
+  dataset: "imagenet"
+  root_dir: "/datasets01/imagenet_full_size/061417"
+  h5py: False
+  dataset_frac: 1.0
+  image_size: 224
+  num_workers: 8
+  mixup: True
+    
+# Logging configuration
+logging:
+  project: "dna"
+  print_freq: 50
+  save_dir: "/tmp"
+  entity: ""
